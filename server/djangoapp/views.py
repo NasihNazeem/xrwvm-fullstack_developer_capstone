@@ -136,8 +136,8 @@ def add_review(request):
     if (request.user.is_anonymous is False):
         # data = json.loads(request.body)
         try:
-            return JsonResponse({"status":200})
-        except Exception as err: 
+            return JsonResponse({"status": 200})
+        except Exception as err:
             print(f"Unexpected {err=}, {type(err)=}")
             print("Network exception occurred")
             return JsonResponse(
