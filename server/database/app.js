@@ -1,3 +1,6 @@
+/* eslint-disable */
+
+// Specify ES6 as the ECMAScript version
 /* eslint-env es6 */
 const express = require('express');
 const mongoose = require('mongoose');
