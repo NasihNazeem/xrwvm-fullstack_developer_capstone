@@ -9,7 +9,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .models import CarMake, CarModel
-from .restapis import get_request, analyze_review_sentiments, post_review
+from .restapis import get_request, analyze_review_sentiments
 
 
 # Get an instance of a logger
@@ -101,11 +101,11 @@ def get_cars(request):
     return JsonResponse({"CarModels": cars})
 
 
-def get_dealerships(request, state = "All"):
+def get_dealerships(request, state="All"):
     if (state == "All"):
         endpoint = "/fetchDealers"
     else:
-        endpoint = "/fetchDealers/"+ state
+        endpoint = "/fetchDealers/" + state
     dealerships = get_request(endpoint)
     return JsonResponse({"status": 200, "dealers": dealerships})
 
@@ -134,12 +134,16 @@ def get_dealer_details(request, dealer_id):
 
 def add_review(request):
     if (request.user.is_anonymous is False):
-        data = json.loads(request.body)
+        # data = json.loads(request.body)
         try:
             return JsonResponse({"status":200})
-        except Exception as err:
+        except Exception as err: 
             print(f"Unexpected {err=}, {type(err)=}")
             print("Network exception occurred")
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+            return JsonResponse(
+                {
+                    "status": 401,
+                    "message": "Error in posting review"
+                })
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
