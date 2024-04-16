@@ -14,10 +14,11 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # - __str__ method to print a car make object
 class CarMake(models.Model):
     name = models.CharField(max_length=100)
-    Description = models.TextField()
+    description = models.TextField()
+    # Other fields as needed
 
     def __str__(self):
-        return self.name
+        return self.name  # Return the name as the string representation
 
 
 # <HINT> Create a Car Model model `class CarModel(models.Model):`:
